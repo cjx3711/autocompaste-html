@@ -110,10 +110,12 @@ AutoComPaste.Interface = (function () {
         // For every text that we find, we create a new window for it.
         console.log("Interface._fetchTextComplete: Finished fetching all texts");
 
+        var i = 0;
         for (var text_title in privates.texts) {
           if (privates.texts.hasOwnProperty(text_title)) {
             console.log("Interface._fetchTextComplete: Creating window for text \"" + text_title + "\"");
-            iface._createWindowForText(text_title);
+            iface._createWindowForText(text_title, i, Object.keys(privates.texts).length);
+            i++;
           }
         }
 
@@ -124,7 +126,6 @@ AutoComPaste.Interface = (function () {
                               rows: 10,
                               cols: 40
                             });
-
         //  For ACP mode, engine is passed into the interface. 
         //  Initialize the interface with the engine.
         if (privates.engine) {
@@ -140,6 +141,7 @@ AutoComPaste.Interface = (function () {
         privates.wm.createWindow("text_editor");
         privates.wm.setWindowTitle("text_editor", "Text Editor");
         privates.wm.setWindowContent('text_editor', acp_textarea);
+        privates.wm.moveWindowTo('text_editor', 0, privates.wm.getDisplayHeight() - 300);
         acp_textarea.focus();
 
         // Dispatch an event.
@@ -157,7 +159,7 @@ AutoComPaste.Interface = (function () {
       privates.texts[text_source.title] = data;
     };
 
-    this._createWindowForText = function _createWindowForText (text_title) {
+    this._createWindowForText = function _createWindowForText (text_title, i, total) {
       
       privates.wm.createWindow(text_title, 500, 400);
       privates.wm.setWindowTitle(text_title, text_title);
@@ -173,9 +175,16 @@ AutoComPaste.Interface = (function () {
       // the boundaries of the display.
       var height_safety_bounds = privates.wm.getDisplayHeight()/1.5;
       var width_safety_bounds = privates.wm.getDisplayWidth()/5;
+      var x = i % 3;
+      var y = parseInt(Math.floor(i / 3));
+      console.log(i, x, y);
+      var xCoord = ((privates.wm.getDisplayWidth() - width_safety_bounds) / 3) * x;
+      var yCoord = ((privates.wm.getDisplayHeight() - height_safety_bounds) / 2) * y;
+      console.log(xCoord)
       privates.wm.moveWindowTo(text_title,
-        Math.random() * (privates.wm.getDisplayWidth() - width_safety_bounds),
-        Math.random() * (privates.wm.getDisplayHeight() - height_safety_bounds)
+        xCoord, yCoord
+        // Math.random() * (privates.wm.getDisplayWidth() - width_safety_bounds)
+        // Math.random() * (privates.wm.getDisplayHeight() - height_safety_bounds)
       );
     };
 
