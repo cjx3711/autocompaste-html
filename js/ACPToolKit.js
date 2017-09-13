@@ -74,6 +74,9 @@ var ACPToolKit = (function () {
         var wm = new WindowManager('autocompaste-display');
         var currentTrialOptions = null;
         var startTime = null;
+        var clicks = 0;
+        var keypresses = 0;
+        var backspaces = 0;
 
         module.presentTrial = function (options) {
             startTime = new Date().getTime();
@@ -82,6 +85,10 @@ var ACPToolKit = (function () {
             var data_file = options.data_file;
             var stimuli = options.stimuli;
             var layout = options.layout;
+            
+            clicks = 0;
+            keypresses = 0;
+            backspaces = 0;
 
             $('.js-expt-technique').text(options.technique);
             $('.js-expt-granularity').text(options.granularity);
@@ -94,6 +101,19 @@ var ACPToolKit = (function () {
             $('#autocompaste-measure-get-single-line-height').remove();
             $('#autocompaste-measure-text-length-in-pixels').remove();
             $('#autocompaste-completion').remove();
+            
+            $(window).off('click');
+            $(window).on('click', function() {
+              clicks++;
+            })
+            $(window).off('keydown');
+            $(window).on('keydown', function(e) {
+              if ( event.which == 8 ) {
+                backspace++;
+              } else {
+                keypresses++;
+              }
+            })
 
             switch (options.technique) {
                 case 'TRADITIONAL':
@@ -139,6 +159,9 @@ var ACPToolKit = (function () {
             currentTrialOptions.end_time = endTime;
             currentTrialOptions.duration = endTime - startTime;
             currentTrialOptions.user_response = $.trim($('.autocompaste-textarea').val());
+            currentTrialOptions.clicks = clicks;
+            currentTrialOptions.backspaces = backspaces;
+            currentTrialOptions.keypresses = keypresses;
             return currentTrialOptions;
         }
     }

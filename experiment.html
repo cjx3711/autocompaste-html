@@ -83,7 +83,7 @@
             var totalNumberOfTrials;
             var headers = ['Participant id', 'Technique', 'Granularity',
                             'Trial no', 'Stimuli', 'User Response', 'Trial Start Time',
-                            'Trial End Time', 'Trial Time', 'Accuracy'];
+                            'Trial End Time', 'Trial Time', 'Accuracy', 'Clicks', 'Keypresses', 'Backspaces'];
             var trialData = [];
             var pid;
 
@@ -91,6 +91,7 @@
                 if (currentTrial !== 0) {
                     var trialResult = ACPToolKit.getCurrentTrialState();
 
+                  
                     var technique = trialResult.technique;
                     var granularity = trialResult.granularity;
                     var trialNum = currentTrial;
@@ -99,11 +100,14 @@
                     var trialStartTime = trialResult.start_time;
                     var trialEndTime = trialResult.end_time;
                     var trialDuration = trialResult.duration;
+                    var clicks = trialResult.clicks;
+                    var backspaces = trialResult.backspaces;
+                    var keypresses = trialResult.keypresses;
                     var accuracy = stimuli === userResponse ? 1 : 0;
 
                     var row = [pid, technique, granularity, trialNum,
                                 stimuli, userResponse, trialStartTime,
-                                trialEndTime, trialDuration, accuracy];
+                                trialEndTime, trialDuration, accuracy, clicks, keypresses, backspaces];
                     trialData.push(row);
                 }
 
@@ -119,7 +123,7 @@
             }
 
             $(document).ready(function () {
-              function generateTrials(data) {
+              function generateTrials(data, trialSequence) {
                 var trials = [];
                 
                 console.log("Generate trials")
@@ -139,12 +143,15 @@
                 }
                 
                 for ( var g = 0; g < 3; g++ ) { // Granularities
-                  var granularity = granularities[g];
+                  var gid = (g + trialSequence.granularity) % 3;
+                  var granularity = granularities[gid];
                   prevIndex = -1;
                   for ( var t = 0; t < 2; t++ ) { // Techniques
-                    var technique = techniques[t];
+                    var tid = (t + trialSequence.technique) % 2;
+                    var technique = techniques[tid];
                     for ( var l = 0; l < 2; l++ ) { // Layouts
-                      var layout = layouts[l];
+                      var lid = (l + trialSequence.layout) % 2;
+                      var layout = layouts[lid];
                       
                       for ( var tr = 0; tr < 3; tr++ ) { // Trials
                         trials.push({
@@ -161,15 +168,24 @@
                 return trials;
               }
               
-              $.get('data/experiments.json', function (data) {
-                trialsData = generateTrials(data);
-                currentTrial = 0;
-                totalNumberOfTrials = trialsData.length;
-                $('.js-expt-num-trials').text(totalNumberOfTrials);
-                trialData.push(headers);
-                next();
+              $.get('data/users.json', function (users) {
                 pid = ACPToolKit.getCurrentParticipantId();
-              })
+                var participantID = parseInt(pid.replace(/\D/g,'')) - 1;
+                var maxUsers = users.length;
+                var trialSequence = users[participantID % maxUsers];
+                console.log(trialSequence);
+                
+                $.get('data/experiments.json', function (data) {
+                  trialsData = generateTrials(data, trialSequence);
+                  currentTrial = 0;
+                  totalNumberOfTrials = trialsData.length;
+                  $('.js-expt-num-trials').text(totalNumberOfTrials);
+                  trialData.push(headers);
+                  next();
+                  
+                });
+              });
+            
             });
         </script>
     </body>

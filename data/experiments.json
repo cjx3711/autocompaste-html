@@ -4,9 +4,9 @@
     "TRADITIONAL"
   ],
   "granularities": [
+    "phrase",
     "sentence",
-    "paragraph",
-    "phrase"
+    "paragraph"
   ],
   "layouts": [
     "random",

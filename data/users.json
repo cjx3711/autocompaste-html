@@ -1,0 +1,62 @@
+[
+  {
+    "granularity": 0,
+    "technique": 0,
+    "layout": 0
+  },
+  {
+    "granularity": 0,
+    "technique": 0,
+    "layout": 1
+  },
+  {
+    "granularity": 0,
+    "technique": 1,
+    "layout": 0
+  },
+  {
+    "granularity": 0,
+    "technique": 1,
+    "layout": 1
+  },
+  {
+    "granularity": 1,
+    "technique": 0,
+    "layout": 0
+  },
+  {
+    "granularity": 1,
+    "technique": 0,
+    "layout": 1
+  },
+  {
+    "granularity": 1,
+    "technique": 1,
+    "layout": 0
+  },
+  {
+    "granularity": 1,
+    "technique": 1,
+    "layout": 1
+  },
+  {
+    "granularity": 2,
+    "technique": 0,
+    "layout": 0
+  },
+  {
+    "granularity": 2,
+    "technique": 0,
+    "layout": 1
+  },
+  {
+    "granularity": 2,
+    "technique": 1,
+    "layout": 0
+  },
+  {
+    "granularity": 2,
+    "technique": 1,
+    "layout": 1
+  }
+]
