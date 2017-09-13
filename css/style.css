@@ -23,6 +23,10 @@ body.experiment-page {
 /**
  * Main ACP styles
  */
+#copypaste-technique {
+  color: #B31111;
+  font-weight: bold;
+}
 
 #autocompaste {
   background-color: #ccc;
