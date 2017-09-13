@@ -1,40 +1,54 @@
 {
-    "experiments": [
-        { 
-            "technique": "AUTOCOMPASTE", 
-            "granularity": "sentence",
-            "data_file": "data/texts.json",
-            "stimuli": "What is acceptor atoms?" 
-        },
-        { 
-            "technique": "AUTOCOMPASTE", 
-            "granularity": "paragraph",
-            "data_file": "data/texts.json",
-            "stimuli": "What is AC coupling? Circuit that passes an AC signal while blocking a DC voltage." 
-        },
-        { 
-            "technique": "AUTOCOMPASTE", 
-            "granularity": "phrase",
-            "data_file": "data/texts.json",
-            "stimuli": "number of positive charges" 
-        },
-        { 
-            "technique": "TRADITIONAL", 
-            "granularity": "sentence",
-            "data_file": "data/texts.json",
-            "stimuli": "What is acceptor atoms?" 
-        },
-        { 
-            "technique": "TRADITIONAL", 
-            "granularity": "paragraph",
-            "data_file": "data/texts.json",
-            "stimuli": "What is AC coupling? Circuit that passes an AC signal while blocking a DC voltage." 
-        },
-        { 
-            "technique": "TRADITIONAL", 
-            "granularity": "phrase",
-            "data_file": "data/texts.json",
-            "stimuli": "number of positive charges" 
-        }        
+  "techniques": [
+    "AUTOCOMPASTE",
+    "TRADITIONAL"
+  ],
+  "granularities": [
+    "sentence",
+    "paragraph",
+    "phrase"
+  ],
+  "layouts": [
+    "random",
+    "tiled"
+  ],
+  "stimuli": {
+    "sentence": [
+      "What is acceptor atoms?",
+      "The positive electrode or terminal of a device.",
+      "The rotating or moving component of a magnetic circuit.",
+      "Aviation electronics.",
+      "What is active region?",
+      "Power supply that delivers an AC voltage.",
+      "What is base biasing?",
+      "What is alternator?",
+      "Name for an AC generator.",
+      "Traditionally in English, an article is usually considered to be a type of adjective."
+    ],
+    "paragraph": [
+      "What is AC coupling? Circuit that passes an AC signal while blocking a DC voltage.",
+      "What is avionics? Aviation electronics.",
+      "What is balanced bridge? Condition that occurs when a bridge circuit is adjusted to produce a zero output.",
+      "What is AC/DC? Equipment that will operate on either an AC or DC power source.",
+      "What is active filter? A filter that uses an amplifier in addition to reactive components to pass or reject selected frequencies.",
+      "What is bipolar junction transistor? (BJT), A three terminal device in which emitter to collector current is controlled by base current.",
+      "This obligatory nature of articles makes them among the most common words in many languages - in English, for example, the most frequent word is the.",
+      "What is average value? A value of voltage or current where the area of the wave above the value equals the area of the wave below the value."
+    ],
+    "phrase": [
+      "number of positive charges" ,
+      "represented as continuously varying",
+      "converts a radiated electromagnetic",
+      "rotating or moving",
+      "either an AC or DC power source",
+      "accept free electrons",
+      "band of frequencies",
+      "two or more cells",
+      "collector current to emitter current",
+      "primary cell",
+      "expressed with a certain definiteness",
+      "most frequent word"
+      
     ]
+  }
 }

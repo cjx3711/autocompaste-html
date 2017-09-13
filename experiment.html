@@ -119,15 +119,57 @@
             }
 
             $(document).ready(function () {
-                $.get('data/experiments.json', function (data) {
-                    trialsData = data.experiments;
-                    currentTrial = 0;
-                    totalNumberOfTrials = trialsData.length;
-                    $('.js-expt-num-trials').text(totalNumberOfTrials);
-                    trialData.push(headers);
-                    next();
-                    pid = ACPToolKit.getCurrentParticipantId();
-                })
+              function generateTrials(data) {
+                var trials = [];
+                
+                console.log("Generate trials")
+                var granularities = data.granularities;
+                var techniques = data.techniques;
+                var layouts = data.layouts;
+                
+                var prevIndex = -1;
+                function getStimuli(type, data) {
+                  var stimuliArray = data.stimuli[type];
+                  var stimuliIndex = parseInt(Math.floor(Math.random() * stimuliArray.length));
+                  while ( stimuliIndex == prevIndex ) {
+                    stimuliIndex = parseInt(Math.floor(Math.random() * stimuliArray.length));
+                  }
+                  prevIndex = stimuliIndex;
+                  return stimuliArray[stimuliIndex];
+                }
+                
+                for ( var g = 0; g < 3; g++ ) { // Granularities
+                  var granularity = granularities[g];
+                  prevIndex = -1;
+                  for ( var t = 0; t < 2; t++ ) { // Techniques
+                    var technique = techniques[t];
+                    for ( var l = 0; l < 2; l++ ) { // Layouts
+                      var layout = layouts[l];
+                      
+                      for ( var tr = 0; tr < 3; tr++ ) { // Trials
+                        trials.push({
+                          technique: technique, 
+                          granularity: granularity,
+                          layout: layout,
+                          data_file: "data/texts.json",
+                          stimuli: getStimuli(granularity, data)
+                        })
+                      }
+                    }
+                  }
+                }
+                return trials;
+              }
+              
+              $.get('data/experiments.json', function (data) {
+                trialsData = generateTrials(data);
+                currentTrial = 0;
+                totalNumberOfTrials = trialsData.length;
+                $('.js-expt-num-trials').text(totalNumberOfTrials);
+                trialData.push(headers);
+                next();
+                pid = ACPToolKit.getCurrentParticipantId();
+              })
             });
         </script>
     </body>

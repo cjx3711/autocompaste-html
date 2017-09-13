@@ -33,7 +33,7 @@ AutoComPaste.Interface = (function () {
   /**
    * The class constructor.
    */
-  function Interface (wm, engine, texts_json) {
+  function Interface (wm, engine, texts_json, layout) {
     /** Internal functions */
     this._showError = function _showerror() {
       document.getElementById('error-overlay').style.display = 'block';
@@ -114,7 +114,7 @@ AutoComPaste.Interface = (function () {
         for (var text_title in privates.texts) {
           if (privates.texts.hasOwnProperty(text_title)) {
             console.log("Interface._fetchTextComplete: Creating window for text \"" + text_title + "\"");
-            iface._createWindowForText(text_title, i, Object.keys(privates.texts).length);
+            iface._createWindowForText(text_title, i, Object.keys(privates.texts).length, layout);
             i++;
           }
         }
@@ -141,7 +141,9 @@ AutoComPaste.Interface = (function () {
         privates.wm.createWindow("text_editor");
         privates.wm.setWindowTitle("text_editor", "Text Editor");
         privates.wm.setWindowContent('text_editor', acp_textarea);
-        privates.wm.moveWindowTo('text_editor', 0, privates.wm.getDisplayHeight() - 300);
+        if ( layout != 'random' ) {
+          privates.wm.moveWindowTo('text_editor', 0, privates.wm.getDisplayHeight() - 300);
+        }
         acp_textarea.focus();
 
         // Dispatch an event.
@@ -159,7 +161,7 @@ AutoComPaste.Interface = (function () {
       privates.texts[text_source.title] = data;
     };
 
-    this._createWindowForText = function _createWindowForText (text_title, i, total) {
+    this._createWindowForText = function _createWindowForText (text_title, i, total, layout) {
       
       privates.wm.createWindow(text_title, 500, 400);
       privates.wm.setWindowTitle(text_title, text_title);
@@ -175,17 +177,19 @@ AutoComPaste.Interface = (function () {
       // the boundaries of the display.
       var height_safety_bounds = privates.wm.getDisplayHeight()/1.5;
       var width_safety_bounds = privates.wm.getDisplayWidth()/5;
-      var x = i % 3;
-      var y = parseInt(Math.floor(i / 3));
-      console.log(i, x, y);
-      var xCoord = ((privates.wm.getDisplayWidth() - width_safety_bounds) / 3) * x;
-      var yCoord = ((privates.wm.getDisplayHeight() - height_safety_bounds) / 2) * y;
-      console.log(xCoord)
-      privates.wm.moveWindowTo(text_title,
-        xCoord, yCoord
-        // Math.random() * (privates.wm.getDisplayWidth() - width_safety_bounds)
-        // Math.random() * (privates.wm.getDisplayHeight() - height_safety_bounds)
-      );
+      console.log("Layout", layout)
+      if ( layout == 'random' ) {
+        privates.wm.moveWindowTo(text_title,
+          Math.random() * (privates.wm.getDisplayWidth() - width_safety_bounds),
+          Math.random() * (privates.wm.getDisplayHeight() - height_safety_bounds)
+        );
+      } else {
+        var x = i % 3;
+        var y = parseInt(Math.floor(i / 3));
+        var xCoord = ((privates.wm.getDisplayWidth() - width_safety_bounds) / 3) * x;
+        var yCoord = ((privates.wm.getDisplayHeight() - height_safety_bounds) / 2) * y;
+        privates.wm.moveWindowTo(text_title, xCoord, yCoord );
+      }
     };
 
     this.addEventListener = function addEventListener (name, handler) {
@@ -246,6 +250,7 @@ AutoComPaste.Interface = (function () {
 
     privates.texts = { };
     privates.texts_json = texts_json;
+    privates.layout = layout;
     privates.texts_available = 0;
     privates.texts_returned = 0;
     privates.events = { };
