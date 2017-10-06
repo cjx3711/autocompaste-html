@@ -109,7 +109,7 @@ var ACPToolKit = (function () {
             $(window).off('keydown');
             $(window).on('keydown', function(e) {
               if ( event.which == 8 ) {
-                backspace++;
+                backspaces++;
               } else {
                 keypresses++;
               }

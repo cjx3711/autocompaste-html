@@ -57,7 +57,7 @@
                     </table>
                     <p>Please copy-paste the following <span class="js-expt-granularity">phrase</span> using the <span class="js-expt-technique">AUTOCOMPASTE</span> technique from one of the open windows.</p>
                     <div id="stimuli" class="alert alert-danger js-expt-stimuli">This is a long stimuli!</div>
-                    <button class="btn btn-primary btn-lg" onclick="next()">Next Task</button>
+                    <button class="btn btn-primary btn-lg" onclick="next()">Next Task</button> <span style="color:#999; font-weight:bold; font-size:12px; padding-left:5px">SHIFT + ENTER</span>
                 </div>
                 <div id="autocompaste" class="col-sm-9">
                     <div id="autocompaste-display"></div>
@@ -126,7 +126,7 @@
               function generateTrials(data, trialSequence) {
                 var trials = [];
                 
-                console.log("Generate trials")
+                console.log("Generate trials");
                 var granularities = data.granularities;
                 var techniques = data.techniques;
                 var layouts = data.layouts;
@@ -167,7 +167,12 @@
                 }
                 return trials;
               }
-              
+              $(window).keypress(function(event) {
+                if ( event.shiftKey && event.which == 13 ) {
+                  event.preventDefault();
+                  next();
+                }
+              });
               $.get('data/users.json', function (users) {
                 pid = ACPToolKit.getCurrentParticipantId();
                 var participantID = parseInt(pid.replace(/\D/g,'')) - 1;
