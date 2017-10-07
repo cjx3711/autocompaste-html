@@ -19,7 +19,9 @@ body.experiment-page {
 .navbar {
   margin-bottom: 0;
 }
-
+.dropdown-menu {
+  z-index: 9999;
+}
 /**
  * Main ACP styles
  */
