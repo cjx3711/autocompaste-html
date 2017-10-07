@@ -159,14 +159,13 @@
             var trialData = [];
             var pid;
             var block = 1;
-            var totalBlocks = 2;
+            var totalBlocks = 3;
             
             
 
             function next (shiftenter) {
               if (currentTrial !== 0) {
                 var trialResult = ACPToolKit.getCurrentTrialState();
-                
                 
                 var technique = trialResult.technique;
                 var granularity = trialResult.granularity;
@@ -201,6 +200,7 @@
                     block++;
                     resetTrials();
                   } else {
+                    $(window).unbind('beforeunload');
                     window.location = 'questionnaire-post.html';
                   }
                 }
@@ -275,6 +275,10 @@
                 event.preventDefault();
                 next(true);
               }
+            });
+            
+            $(window).bind('beforeunload', function(){
+             return 'Navigating from the page now will NOT save your experiment progress! Are you sure you would like to navigate from the experiment?';
             });
             $.get('data/users.json', function (users) {
               pid = ACPToolKit.getCurrentParticipantId();

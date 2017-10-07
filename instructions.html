@@ -31,19 +31,50 @@
         </nav>
 
         <div class="container">
-            <div class="row">
+            <div class="row" id="screenWrong">
+              <div class="col-md-8 col-md-offset-2">
+                  <h1>Instructions</h1>
+                  
+                  <div id="screenWide" class="screenWrong alert alert-warning">
+                    Your screen <strong>width</strong> is too <strong>big</strong>.<br/>
+                    Please resize your window accordingly<br/>
+                    If you need to, press <code>Ctrl</code> + <code>+</code> to scale the interface up.
+                  </div>
+                  <div id="screenNarrow" class="screenWrong alert alert-warning">
+                    Your screen <strong>width</strong> is too <strong>small</strong>.<br/>
+                    Please resize your window accordingly<br/>
+                    If you need to, press <code>Ctrl</code> + <code>-</code> to scale the interface down.
+                  </div>
+                  <div id="screenTall" class="screenWrong alert alert-warning">
+                    Your screen <strong>height</strong> is too <strong>tall</strong>.<br/>
+                    Please resize your window accordingly<br/>
+                    If you need to, press <code>Ctrl</code> + <code>+</code> to scale the interface up.
+                  </div>
+                  <div id="screenShort" class="screenWrong alert alert-warning">
+                    Your screen <strong>height</strong> is too <strong>short</strong>.<br/>
+                    Please resize your window accordingly<br/>
+                    If you need to, press <code>Ctrl</code> + <code>-</code> to scale the interface down.
+                  </div>
+                </div>
+            </div>
+            <div class="row hidden-md" id="instructions">
                 <div class="col-md-8 col-md-offset-2">
                     <h1>Instructions</h1>
+                    <div class="alert alert-success">
+                      Your screen is the right size.<br/>
+                      Please use a <strong>mouse</strong> and do <strong>NOT</strong> resize your screen for the experiment.
+                    </div>
                     <hr>
                     <p>Dear participant <span class="js-pid pid"></span>, please read the instructions before the experiment.
 
-                    <p>For this experiment, we will be testing the efficiency of a new copy pasting technique called AutoCompaste. You will be presented with a series of tests to complete.<>
+                    <p>For this experiment, we will be testing the efficiency of a new copy pasting technique called AutoCompaste. You will be presented with a series of tests to complete.</p>
                       
                     <h2>What to look out for</h2>
                     
                     <div class="row">
                       <div class="col-md-7 col-sm-6">
-                        <p>When you are presented with a test, there are two main things to look out for. These two details are highlighted in red for your convenience.</p>
+                        <p>When you are presented with a test, there are two main things to look out for.</p>
+                        <p>These two details are <span style="color:red;">highlighted in red</span> for your convenience.</p>
                         <ol>
                           <li>
                             The technique you should be using.
@@ -146,12 +177,49 @@
         <script src="js/main.js"></script>
 
         <script>
-            $(function () {
-                $('form').submit(function (event) {
-                    event.preventDefault();
-                    window.location = 'experiment.html';
-                });
-            });
+      
+          $(function () {
+              $('form').submit(function (event) {
+                  event.preventDefault();
+                  window.location = 'experiment.html';
+              });
+              function updateInstructions() {
+                if ( checkScreen() ) {
+                  $('#screenWrong').hide();
+                  $('#instructions').show();
+                } else {
+                  $('#screenWrong').show();
+                  $('#instructions').hide();
+                }
+                $('.screenWrong').hide();
+                if ( $(window).width() - 1450 > 200 ) {
+                  $('#screenWide').show();
+                }
+                if ( $(window).width() - 1450 < -200 ) {
+                  $('#screenNarrow').show();
+                }
+                if ( $(window).height() - 750 > 200 ) {
+                  $('#screenTall').show();
+                }
+                if ( $(window).height() - 750 < -200 ) {
+                  $('#screenShort').show();
+                }
+              }
+              function checkScreen() {
+                console.log($(window).width(), $(window).height());
+                if ( Math.abs($(window).width() - 1450 ) < 200 && Math.abs($(window).height() - 750 ) < 200 ) {
+                  return true;
+                } return false;
+                // 1483 821
+                
+                
+              }
+              updateInstructions();
+              $(window).resize(function() {
+                updateInstructions();
+              });
+                
+          });
         </script>
     </body>
 </html>
