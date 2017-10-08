@@ -14,41 +14,68 @@
   ],
   "stimuli": {
     "sentence": [
+      " A circuit that increases the voltage, current, or power of a signal.",
+      "The \"P\" material of a diode.",
+      "What is bistable multivibrator?",
       "What is acceptor atoms?",
       "The positive electrode or terminal of a device.",
       "The rotating or moving component of a magnetic circuit.",
+      "A method of biasing a BJT in which the bias voltage is supplied to the base by means of a resistor.",
       "Aviation electronics.",
       "What is active region?",
       "Power supply that delivers an AC voltage.",
       "What is base biasing?",
+      "A primary cell that delivers more current than a carbon-zinc cell.",
+      "The rotating or moving component of a magnetic circuit.",
       "What is alternator?",
+      "Frequencies above and below the pass band are heavily attenuated.",
       "Name for an AC generator.",
+      "A voltage in which the polarity alternates.",
+      "A single winding transformer where the output is taken from taps on the winding.",
+      "A three terminal device in which emitter to collector current is controlled by base current.",
       "Traditionally in English, an article is usually considered to be a type of adjective."
     ],
     "paragraph": [
       "What is AC coupling? Circuit that passes an AC signal while blocking a DC voltage.",
       "What is avionics? Aviation electronics.",
+      "What is antenna, receiving? A device that converts a radiated electromagnetic wave into an electrical wave.",
+      "What is amplitude? Magnitude or size of a signal voltage or current.",
       "What is balanced bridge? Condition that occurs when a bridge circuit is adjusted to produce a zero output.",
       "What is AC/DC? Equipment that will operate on either an AC or DC power source.",
+      "What is binary? A number system having only two symbols, 0 and 1. A base 2 number system.",
       "What is active filter? A filter that uses an amplifier in addition to reactive components to pass or reject selected frequencies.",
       "What is bipolar junction transistor? (BJT), A three terminal device in which emitter to collector current is controlled by base current.",
       "This obligatory nature of articles makes them among the most common words in many languages - in English, for example, the most frequent word is the.",
-      "What is average value? A value of voltage or current where the area of the wave above the value equals the area of the wave below the value."
+      "What is average value? A value of voltage or current where the area of the wave above the value equals the area of the wave below the value.",
+      "What is armstrong oscillator? An oscillator that uses an isolation transformer to achieve positive feedback from output to input.",
+      "Traditionally in English, an article is usually considered to be a type of adjective. In some languages, articles are a special part of speech, which cannot easily be combined with other parts of speech. It is also possible for articles to be part of another part of speech category such as a determiner, an English part of speech category that combines articles and demonstratives (such as 'this' and 'that').",
+      "What is alternator? Name for an AC generator.",
+      "What is ammeter? A meter used to measure current.",
+      "What is alpha? Ratio of collector current to emitter current in a bipolar junction transistor (BJT) Greek letter alpha \"a\" is the symbol used."
     ],
     "phrase": [
+      "Aviation electronics",
+      "single winding transformer",
       "number of positive charges" ,
       "represented as continuously varying",
       "converts a radiated electromagnetic",
       "rotating or moving",
+      "by means of a resistor",
+      "every common noun",
       "either an AC or DC power source",
       "accept free electrons",
+      "among the most common words",
+      "amplitude of an action or signal",
       "band of frequencies",
       "two or more cells",
+      "a bridge circuit is adjusted",
       "collector current to emitter current",
       "primary cell",
+      "Equipment that will operate",
       "expressed with a certain definiteness",
-      "most frequent word"
-      
+      "most frequent word",
+      "Spring clip on the end of a test",
+      "primary cell that delivers"
     ]
   }
 }

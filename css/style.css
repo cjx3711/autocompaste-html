@@ -12,6 +12,9 @@ body.experiment-page {
   font-weight: bold;
 }
 
+pre {
+  white-space: pre-wrap;
+}
 .spacer {
   height: 20px;
 }
@@ -19,7 +22,9 @@ body.experiment-page {
 .navbar {
   margin-bottom: 0;
 }
-
+.dropdown-menu {
+  z-index: 9999;
+}
 /**
  * Main ACP styles
  */

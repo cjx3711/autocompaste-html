@@ -35,8 +35,6 @@
                 <div class="col-md-8 col-md-offset-2">
                     <h1>Post-Experiment Questionnaire</h1>
                     <hr>
-                    <p>This part of the interface collects whatever post-experiment information. After the experiment, you want to collect more qualitative and quantitative feedback about the tested techniques. Some of the typical questions include, personal preferences, any difficulties participants experienced in the experiment, and areas of improvement. Please design a basic post-experimental questionnaire (no more than 10 questions).</p>
-
                     <p>Current participant: <span class="js-pid pid"></span></p>
 
                     <form id="post-expt-form">
@@ -57,12 +55,12 @@
                         </div>
                         
                         <div class="form-group">
-                            <label for="q2">Question 2 - What was the main difficuly you had with <strong>Autocompaste</strong>?</label>
+                            <label for="q2">Question 2 - What was the main difficulty you had with <strong>Autocompaste</strong>?</label>
                             <textarea class="form-control" id="q2" name="q2" placeholder="Enter response"></textarea>
                         </div>
                         
                         <div class="form-group">
-                            <label for="q3">Question 3 - What was the main difficuly you had with the <strong>Traditional</strong> method?</label>
+                            <label for="q3">Question 3 - What was the main difficulty you had with the <strong>Traditional</strong> method?</label>
                             <textarea class="form-control" id="q3" name="q3" placeholder="Enter response"></textarea>
                         </div>
                         
@@ -95,7 +93,7 @@
                     // Do your own form validation here.
                     ACPToolKit.downloadFormData(formResponses, 'post');
                     ACPToolKit.clearAllData();
-                    alert('Thank you for your participation!');
+                    alert('Thank you for your participation! Please send all the downloaded files to me.');
                 });
             });
         </script>

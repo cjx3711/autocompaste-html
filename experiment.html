@@ -65,7 +65,7 @@
                     </table>
                     <p>Please copy-paste the following <span class="js-expt-granularity">phrase</span> using the <span class="js-expt-technique">AUTOCOMPASTE</span> technique from one of the open windows.</p>
                     <div id="stimuli" class="alert alert-danger js-expt-stimuli">This is a long stimuli!</div>
-                    <button class="btn btn-primary btn-lg" onclick="next()">Next Task</button> <span style="color:#999; font-weight:bold; font-size:12px; padding-left:5px">SHIFT + ENTER</span>
+                    <button class="btn btn-primary btn-lg" onclick="nextFunc(false)">Next Task</button> <span style="color:#999; font-weight:bold; font-size:12px; padding-left:5px">SHIFT + ENTER</span>
                 </div>
                 <div id="autocompaste" class="col-sm-9">
                     <div id="autocompaste-display"></div>
@@ -146,7 +146,7 @@
             var wrongness = distance / len;
             return 1 - wrongness;
           }
-      
+          var nextFunc = function() {}
           $(document).ready(function () {
             var experimentsData;
             var trialsData;
@@ -159,14 +159,13 @@
             var trialData = [];
             var pid;
             var block = 1;
-            var totalBlocks = 2;
+            var totalBlocks = 3;
             
             
 
             function next (shiftenter) {
               if (currentTrial !== 0) {
                 var trialResult = ACPToolKit.getCurrentTrialState();
-                
                 
                 var technique = trialResult.technique;
                 var granularity = trialResult.granularity;
@@ -201,10 +200,13 @@
                     block++;
                     resetTrials();
                   } else {
+                    $(window).unbind('beforeunload');
                     window.location = 'questionnaire-post.html';
                   }
                 }
               }
+              
+              nextFunc = next;
               
               function updatePerc() {
                 var currentTrialTotal = currentTrial + (block - 1) * totalNumberOfTrials;
@@ -275,6 +277,10 @@
                 event.preventDefault();
                 next(true);
               }
+            });
+            
+            $(window).bind('beforeunload', function(){
+             return 'Navigating from the page now will NOT save your experiment progress! Are you sure you would like to navigate from the experiment?';
             });
             $.get('data/users.json', function (users) {
               pid = ACPToolKit.getCurrentParticipantId();

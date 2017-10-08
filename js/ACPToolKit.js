@@ -126,26 +126,32 @@ var ACPToolKit = (function () {
             }
 
             var iface = new AutoComPaste.Interface(wm, engine, data_file, layout);
+            
 
             // Highlight the relevant text.
             iface.addEventListener('loaded', function () {
-                var lines_to_highlight = stimuli.split("\n\n");
+              var instructions = 'AUTOCOMPASTE: Just start typing!'
+              if ( options.technique == 'TRADITIONAL' ) {
+                instructions = 'TRADITIONAL: Find text and Ctrl + C & Ctrl + V'
+              }
+              $('.autocompaste-textarea').attr('placeholder', instructions);
+              var lines_to_highlight = stimuli.split("\n\n");
 
-                var windows = wm.getWindowList();
-                for (var i = 0; i < windows.length; i++) {
-                    if (windows[i] == 'text_editor') {
-                        continue;
-                    }
+              var windows = wm.getWindowList();
+              for (var i = 0; i < windows.length; i++) {
+                  if (windows[i] == 'text_editor') {
+                      continue;
+                  }
 
-                    var win = wm.getWindowContent(windows[i]);
-                    var content = $(win).find('pre').html();
-                    lines_to_highlight.map (function (value, index, array) {
-                        content = content.replace (value,
-                        "<span class=\"highlighted\">" + value + "</span>");
-                    });
+                  var win = wm.getWindowContent(windows[i]);
+                  var content = $(win).find('pre').html();
+                  lines_to_highlight.map (function (value, index, array) {
+                      content = content.replace (value,
+                      "<span class=\"highlighted\">" + value + "</span>");
+                  });
 
-                  $(win).find('pre').empty().append(content);
-                }
+                $(win).find('pre').empty().append(content);
+              }
             });
         }
 
