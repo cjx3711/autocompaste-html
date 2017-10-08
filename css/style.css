@@ -12,6 +12,9 @@ body.experiment-page {
   font-weight: bold;
 }
 
+pre {
+  white-space: pre-wrap;
+}
 .spacer {
   height: 20px;
 }
